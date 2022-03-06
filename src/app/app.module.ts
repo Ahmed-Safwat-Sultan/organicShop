@@ -1,3 +1,6 @@
+import { UserService } from './services/user.service';
+import { AuthService } from './services/auth/auth.service';
+import { AuthGuard } from './services/auth/auth-guard.service';
 import { environment } from './../environments/environment';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,6 +20,7 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
 import { RouterModule } from '@angular/router';
 import { appRouting } from './app.routing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdminAuthGuard } from './services/auth/admin-auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     RouterModule.forRoot(appRouting),
     NgbModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    AuthGuard,
+    AuthService,
+    UserService,
+    AdminAuthGuard
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
